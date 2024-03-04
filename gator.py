@@ -116,7 +116,7 @@ def alligator(model,
         validity = weights["validity"] * torch.norm(model(input_data)[:,0]-(1-model(perturbed_data_normalized)[:,0]),p=2)
         proximity = weights["proximity"] * torch.norm(delta,p=1)
         #calculate proximity        
-        loss =  robustness + validity + proximity
+        loss =  robustness + validity + 0.05*proximity #lambda = 0.1
 
         # Backpropagation
         loss.backward()
@@ -183,7 +183,7 @@ def alligator_latent(model,
         validity = weights["validity"] * torch.norm(model(input_data)[:,0]-(1-model(perturbed_data_normalized)[:,0]),p=2)
         proximity = weights["proximity"] * torch.norm(delta,p=1)
         #calculate proximity        
-        loss =  robustness + validity + proximity
+        loss =  robustness + validity + 0.05*proximity #lambda=0.1
 
         # Backpropagation
         loss.backward()
